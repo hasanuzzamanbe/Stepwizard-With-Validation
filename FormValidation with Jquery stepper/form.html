@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Smart Wizard - a JavaScript jQuery Step Wizard plugin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Include SmartWizard CSS -->
+    <link href="css/smart_wizard.css" rel="stylesheet" type="text/css" />
+
+    <!-- Optional SmartWizard theme -->
+    <link href="css/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
+    <link href="css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
+    <link href="css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="breadcrumb">
+    <ul>
+        <li><a href="">Pagamentos</a></li>
+        <li>Realize cobranças avulsas de forma rápida e segura.</li>
+    </ul>
+</div>
+<div class="container" style="margin-left: 10px;">
+    <!-- SmartWizard html -->
+    <form action="#" id="myForm" role=form" data-toggle="validator" method="post" accept-charset="utf-8">
+        <div id="smartwizard" class="swMain" style="border:none;">
+            <ul>
+                <li><a href="#step-1">Método de Pagamento<br/>
+                    <small>Escolha a(s) forma(s) de pagamento que vai utilizar para receber</small>
+                </a></li>
+                <li><a href="#step-2">Informações do Cliente<br/>
+                    <small>Preencha algumas informações sobre o seu cliente</small>
+                </a></li>
+                <li><a href="#step-3">Informações da Cobrança<br/>
+                    <small>Defina o valor e os detalhes da sua cobrança</small>
+                </a></li>
+                <li><a href="#step-4">Confirmação<br/>
+                    <small>Confira os últimos detalhes e envie a cobrança a seu cliente</small>
+                </a></li>
+            </ul>
+
+            <div>
+                <div id="step-1">
+                    <h3 class="border-bottom border-gray pb-2">Método de Pagamento</h3>
+                    <span class="badge badge-primary mr-1">Marque o(s) método(s) de pagamento que vai está disponivel para essa cobrança.</span>
+                    <div class="form-step-0" role="form" data-toggle="validator">
+                        <div class="form-group" id="metodo">
+
+                            <!-- Opção via Boleto !-->
+                            <label class="checkbox checkbox-success" for="pagamentoBoleto">
+                                <img src="https://cdn3.iconfinder.com/data/icons/payment-shopping-e-commerce/100/Artboard_40-512.png"
+                                     width="60px;" style="margin-left:10px;"/>
+
+                                <input type="checkbox" class="cardCheck" id="pagamentoBoleto" name="boleto[1][]"
+                                       [value]="boleto"
+                                       formcontrolname="radio">
+                                <span class="badge badge-pill badge-outline-secondary p-2 m-1"
+                                                                     style="font-size:11px;"><strong>Boleto Bancário</strong></span>
+                            </label>
+
+                            <p style="font-size:9px;">O prazo para liberação do valor é de até 2 dias para os pagamentos
+                                realizados via Boleto</p>
+                            <span class="checkmark" style="margin-top:20px;"></span>
+                            <!--<div width="600px;"/></div>-->
+
+
+                            <label class="checkbox checkbox-success" for="pagamentoCartao">
+                                <img src="http://maquineta.clickcredito.com.br/images/bandeiras-aceitas.png"/>
+                                <input type="checkbox" class="cardCheck" id="pagamentoCartao" name="boleto[1][]"
+                                       [value]="card"
+                                       formcontrolname="radio">
+                                <span class="badge badge-pill badge-outline-secondary p-2 m-1"
+                                      style="font-size:11px;"><strong>Cartão de Crédito</strong></span>
+                                <br/>
+
+                            </label>
+                            <p style="font-size:9px;">Suportamos pagamentos através de cartões de crédito das bandeiras
+                                Visa, Master, Amex, ELO, Diners, Discover, Aura, JCB e Hipercard</p>
+                            <span class="checkmark" style="margin-top:25px;"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="step-2">
+                    <div class="card-body">
+                        <div class="form-step-1" role="form" data-toggle="validator">
+                            <div class="form-group row">
+                                <label for="nomeCliente" class="col-sm-2 col-form-label"><strong>Nome do
+                                    Cliente</strong>
+                                    (obrigátorio)</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="nomeCliente" placeholder="João da Silva"
+                                           required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="emailCliente" class="col-sm-2 col-form-label"><strong>Email</strong></label>
+                                <div class="col-sm-4">
+                                    <input type="email" class="form-control" id="emailCliente"
+                                           placeholder="seucliente@dinpay.com.br" required>
+                                    <div class="help-block with-errors"></div>
+                                    <span class="badge badge-outline-dark mr-0" style="margin-top:10px;">Caso esse campo seja preenchido, é enviado um e-mail <br/> com o <strong>link de pagamento</strong> em nome de sua Empresa para o seu <u>Cliente</u></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="step-3" class="">
+                    <div>
+                        <div class="col-lg-12">
+                            <div class="alert alert-warning" role="alert">
+                                <ul style="margin-top: 10px;">
+                                    <li>
+                                        O campo de <code>data de vencimento</code> é data que o <strong>boleto</strong>
+                                        vai
+                                        possuir caso o seu cliente escolha a opção <code>Boleto Bancário</code> na
+                                        página de
+                                        pagamento
+                                    </li>
+                                    <br/>
+                                    <li>
+                                        A opção de <code>Parcelamento</code> deve informar a quantidade máxima que se
+                                        pode
+                                        parcelar esse pagamento
+                                    </li>
+                                </ul>
+                            </div>
+                            <hr/>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-step-2" role="form" data-toggle="validator">
+                                            <div class="form-group form-row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="tituloCobranca"><strong>Titulo da
+                                                        Cobrança</strong></label>
+                                                    <input type="text" class="form-control" id="tituloCobranca"
+                                                           placeholder="Serviço de Design" required="">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group form-row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="valorCobranca"><strong>Valor (R$)</strong></label>
+                                                    <input type="number" class="form-control" id="valorCobranca"
+                                                           placeholder="Defina o valor a receber" required="">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="vencimentoBoleto"><strong>Data de Vencimento p/
+                                                        Boleto</strong></label>
+                                                    <input type="text" class="form-control" id="vencimentoBoleto"
+                                                           placeholder="Vencimento" required="">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="inputGroupPrepend"><strong>Parcelamento</strong></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                                <span class="input-group-text"
+                                                                      id="inputGroupPrepend">Em até</span>
+                                                        </div>
+                                                        <select class="form-control">
+                                                            <option>12 parcelas</option>
+                                                            <option>11 parcelas</option>
+                                                            <option>10 parcelas</option>
+                                                            <option>09 parcelas</option>
+                                                            <option>08 parcelas</option>
+                                                            <option>07 parcelas</option>
+                                                            <option>06 parcelas</option>
+                                                            <option>05 parcelas</option>
+                                                            <option>04 parcelas</option>
+                                                            <option>03 parcelas</option>
+                                                            <option>02 parcelas</option>
+                                                            <option>01 parcela (à vista)</option>
+                                                        </select>
+                                                        <div class="help-block with-errors"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="step-4">
+                    <div>
+                        <div class="row card col-lg-12">
+                            <div class="tab-content" id="myTabContent">
+                                <!--<div class="tab-pane fade show active" id="invoice" role="tabpanel" aria-labelledby="invoice-tab">-->
+                                <div class="d-sm-flex mb-5" data-view="print">
+                                    <span class="m-auto"></span>
+                                </div>
+                                <div id="print-area">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h2 class="font-weight-bold">Vale Turismo Ltda</h2>
+                                            <h4 class="font-weight-bold" style="font-size:16px;">Serviço de Design</h4>
+                                            <p>#106</p>
+                                        </div>
+                                        <div class="col-md-6 text-sm-right">
+                                            <p>
+                                            <p><strong>Data do envio: </strong> 6 de Abril / 2019</p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 mb-4 border-top"></div>
+                                    <div class="row mb-5">
+                                        <div class="col-md-6 mb-3 mb-sm-0">
+                                            <h5 class="font-weight-bold">Enviado por</h5>
+                                            <div class="breadcrumb">
+                                                <ul style="list-style-type:none;">
+                                                    <li><a href="">Cláudio Henrique</a></li>
+                                                    <li>ch@dinpay.com.br</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 text-sm-right">
+                                            <h5 class="font-weight-bold">Recebido por</h5>
+                                            <div class="breadcrumb">
+                                                <ul style="list-style-type:none;">
+                                                    <li><a href="">Daniel Silva</a></li>
+                                                    <li>danielsilva@gmail.com</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="invoice-summary">
+                                                <p>Sub total: <span>R$100,00</span></p>
+                                                <p>Taxas: <span>R$0,00</span></p>
+                                                <h5 class="font-weight-bold">Total: <span> <u>R$100,00</u></span></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Include jQuery and libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+<script type="text/javascript" src="js/jquery.smartWizard.js"></script>
+
+<script type="text/javascript" src="formvalidated.js"></script>
+</body>
+</html>
