@@ -10,7 +10,7 @@
  * https://github.com/techlab/SmartWizard/blob/master/LICENSE
  */
 
-;(function ($, window, document, undefined) {
+; (function ($, window, document, undefined) {
     "use strict";
     // Default options
 
@@ -210,11 +210,11 @@
                     toolbarBottom.append(btnGroup.clone(true));
 
                     if (btnGroupExtra !== null) {
-                      if (this.options.toolbarSettings.toolbarButtonPosition === 'start') {
-                          toolbarBottom.prepend(btnGroupExtra.clone(true));
-                      } else {
-                          toolbarBottom.append(btnGroupExtra.clone(true));
-                      }
+                        if (this.options.toolbarSettings.toolbarButtonPosition === 'start') {
+                            toolbarBottom.prepend(btnGroupExtra.clone(true));
+                        } else {
+                            toolbarBottom.append(btnGroupExtra.clone(true));
+                        }
                     }
                     this.container.after(toolbarBottom);
                     break;
@@ -518,7 +518,7 @@
             // Auto adjust height of the container
             if (this.options.autoAdjustHeight) {
                 var selPage = this.steps.eq(idx).length > 0 ? $(this.steps.eq(idx).attr("href"), this.main) : null;
-                this.container.finish().animate({ minHeight: selPage.outerHeight() }, this.options.transitionSpeed, function () {});
+                this.container.finish().animate({ minHeight: selPage.outerHeight() }, this.options.transitionSpeed, function () { });
             }
             return true;
         },

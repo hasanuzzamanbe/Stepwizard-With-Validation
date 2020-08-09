@@ -1,17 +1,17 @@
-$(document).ready(function(){
+$(document).ready(function () {
     // Toolbar extra buttons
     var btnFinish = $('<button></button>').text('Submit')
         .addClass('btn btn-info')
-        .on('click', function(){
-            if( !$(this).hasClass('disabled')){
+        .on('click', function () {
+            if (!$(this).hasClass('disabled')) {
                 var elmForm = $("#myForm");
-                if(elmForm){
+                if (elmForm) {
                     elmForm.validator('validate');
                     var elmErr = elmForm.find('.has-error');
-                    if(elmErr && elmErr.length > 0){
+                    if (elmErr && elmErr.length > 0) {
                         alert('Oops we still have error in the form, Please fill all the fields before submit');
                         return false;
-                    }else{
+                    } else {
                         alert('Great! we are ready to submit form');
                         elmForm.submit();
                         return false;
@@ -21,7 +21,7 @@ $(document).ready(function(){
         });
     var btnCancel = $('<button></button>').text('Cancel')
         .addClass('btn btn-danger')
-        .on('click', function(){
+        .on('click', function () {
             $('#smartwizard').smartWizard("reset");
             $('#myForm').find("input, textarea").val("");
         });
@@ -29,8 +29,9 @@ $(document).ready(function(){
     $('#smartwizard').smartWizard({
         selected: 0,
         theme: 'dots',
-        transitionEffect:'fade',
-        toolbarSettings: {toolbarPosition: 'bottom',
+        transitionEffect: 'fade',
+        toolbarSettings: {
+            toolbarPosition: 'bottom',
             toolbarExtraButtons: [btnFinish, btnCancel]
         },
         anchorSettings: {
@@ -40,29 +41,29 @@ $(document).ready(function(){
             enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
         }
     });
-    $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+    $("#smartwizard").on("leaveStep", function (e, anchorObject, stepNumber, stepDirection) {
         var elmForm = $("#form-step-" + stepNumber);
         // stepDirection === 'forward' :- this condition allows to do the form validation
         // only on forward navigation, that makes easy navigation on backwards still do the validation when going next
-        if(stepDirection === 'forward' && elmForm){
+        if (stepDirection === 'forward' && elmForm) {
             elmForm.validator('validate');
             var elmErr = elmForm.children('.has-error');
-            if(elmErr && elmErr.length > 0){
+            if (elmErr && elmErr.length > 0) {
                 // Form validation failed
                 return false;
             }
         }
         return true;
     });
-    $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
+    $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection) {
         // Enable finish button only on last step
-        if(stepNumber == 3){
+        if (stepNumber == 3) {
             $('.btn-finish').removeClass('disabled');
-        }else{
+        } else {
             $('.btn-finish').addClass('disabled');
         }
     });
-    $("input:checkbox").on('click', function() {
+    $("input:checkbox").on('click', function () {
         var $box = $(this);
         if ($box.is(":checked")) {
             var group = "input:checkbox[name='" + $box.attr("name") + "']";
